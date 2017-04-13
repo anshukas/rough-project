@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from GiftCertificateServiceImplService WSDL service -->
+
+  <service name="GiftCertificateServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://impl.service.v2.claimable.ws.netshoes.com.br"/>
+      <parameter name="wsdlServiceElement" value="GiftCertificateServiceImplService"/>
+      <parameter name="schemaQualified" value="http://ws,http://impl.service.v2.claimable.ws.netshoes.com.br"/>
+      <parameter name="wsdlServicePort" value="GiftCertificateServiceImpl"/>
+      <parameter name="className" value="br.com.netshoes.ws.claimable.v2.service.impl.GiftCertificateServiceImpl"/>
+      <parameter name="wsdlPortType" value="GiftCertificateServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:retNS="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:rtns="http://ws" name="giftCertificateGenerator" qname="operNS:giftCertificateGenerator" returnQName="retNS:giftCertificateGeneratorReturn" returnType="rtns:GiftCertificateGeneratorRes" soapAction="">
+        <parameter xmlns:pns="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:tns="http://ws" qname="pns:giftCertificateGeneratorRequest" type="tns:GiftCertificateGeneratorReq"/>
+      </operation>
+      <operation xmlns:operNS="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:retNS="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:rtns="http://ws" name="activateGiftCertificate" qname="operNS:activateGiftCertificate" returnQName="retNS:activateGiftCertificateReturn" returnType="rtns:ActivateGiftCertificateRes" soapAction="">
+        <parameter xmlns:pns="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:tns="http://ws" qname="pns:ativateGiftCertificateRequest" type="tns:ActivateGiftCertificateReq"/>
+      </operation>
+      <operation xmlns:operNS="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:retNS="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:rtns="http://ws" name="deactivateGiftCertificate" qname="operNS:deactivateGiftCertificate" returnQName="retNS:deactivateGiftCertificateReturn" returnType="rtns:DeactivateGiftCertificateRes" soapAction="">
+        <parameter xmlns:pns="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:tns="http://ws" qname="pns:DeactivateGiftCertificateRequest" type="tns:DeactivateGiftCertificateReq"/>
+      </operation>
+      <parameter name="allowedMethods" value="deactivateGiftCertificate activateGiftCertificate giftCertificateGenerator"/>
+
+      <typeMapping xmlns:ns="http://ws" qname="ns:GiftCertificate" type="java:ws.GiftCertificate" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws" qname="ns:Result" type="java:ws.Result" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws" qname="ns:DeactivateGiftCertificateReq" type="java:ws.DeactivateGiftCertificateReq" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws" qname="ns:ActivateGiftCertificateReq" type="java:ws.ActivateGiftCertificateReq" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws" qname="ns:GiftCertificateGeneratorReq" type="java:ws.GiftCertificateGeneratorReq" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws" qname="ns:DeactivateGiftCertificateRes" type="java:ws.DeactivateGiftCertificateRes" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws" qname="ns:ActivateGiftCertificateRes" type="java:ws.ActivateGiftCertificateRes" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://ws" qname="ns:GiftCertificateGeneratorRes" type="java:ws.GiftCertificateGeneratorRes" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:cmp-ns="http://ws" qname="ns:ArrayOf_tns1_GiftCertificate" type="java:ws.GiftCertificate[]" innerType="cmp-ns:GiftCertificate" encodingStyle=""/>
+  </service>
+</deployment>

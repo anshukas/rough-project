@@ -1,0 +1,81 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="C:\apache-tomcat-7.0.70\wtpwebapps\GiftCertificateService\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="GiftCertificateServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+  <ns3:operation name="activateGiftCertificate" qname="ns1:activateGiftCertificate" returnQName="ns1:activateGiftCertificateReturn" returnType="ns2:ActivateGiftCertificateRes" soapAction="" xmlns:ns1="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:ns2="http://ws" xmlns:ns3="http://xml.apache.org/axis/wsdd/">
+   <ns3:parameter qname="ns1:ativateGiftCertificateRequest" type="ns2:ActivateGiftCertificateReq"/>
+  </ns3:operation>
+  <ns1:operation name="giftCertificateGenerator" qname="ns3:giftCertificateGenerator" returnQName="ns3:giftCertificateGeneratorReturn" returnType="ns4:GiftCertificateGeneratorRes" soapAction="" xmlns:ns3="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:ns4="http://ws">
+   <ns1:parameter qname="ns3:giftCertificateGeneratorRequest" type="ns4:GiftCertificateGeneratorReq"/>
+  </ns1:operation>
+  <ns1:operation name="deactivateGiftCertificate" qname="ns5:deactivateGiftCertificate" returnQName="ns5:deactivateGiftCertificateReturn" returnType="ns6:DeactivateGiftCertificateRes" soapAction="" xmlns:ns5="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:ns6="http://ws">
+   <ns1:parameter qname="ns5:DeactivateGiftCertificateRequest" type="ns6:DeactivateGiftCertificateReq"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="deactivateGiftCertificate giftCertificateGenerator activateGiftCertificate"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="GiftCertificateServiceImpl"/>
+  <ns1:parameter name="className" value="br.com.netshoes.ws.claimable.v2.service.impl.GiftCertificateServiceImpl"/>
+  <ns1:parameter name="wsdlServicePort" value="GiftCertificateServiceImpl"/>
+  <ns1:parameter name="schemaQualified" value="http://ws,http://impl.service.v2.claimable.ws.netshoes.com.br"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://impl.service.v2.claimable.ws.netshoes.com.br"/>
+  <ns1:parameter name="wsdlServiceElement" value="GiftCertificateServiceImplService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns7:GiftCertificate" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:ws.GiftCertificate" xmlns:ns7="http://ws"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns8:Result" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:ws.Result" xmlns:ns8="http://ws"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns9:DeactivateGiftCertificateReq" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:ws.DeactivateGiftCertificateReq" xmlns:ns9="http://ws"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns10:ActivateGiftCertificateReq" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:ws.ActivateGiftCertificateReq" xmlns:ns10="http://ws"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns11:GiftCertificateGeneratorReq" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:ws.GiftCertificateGeneratorReq" xmlns:ns11="http://ws"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns12:DeactivateGiftCertificateRes" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:ws.DeactivateGiftCertificateRes" xmlns:ns12="http://ws"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns13:ActivateGiftCertificateRes" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:ws.ActivateGiftCertificateRes" xmlns:ns13="http://ws"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns14:GiftCertificateGeneratorRes" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:ws.GiftCertificateGeneratorRes" xmlns:ns14="http://ws"/>
+  <ns1:arrayMapping innerType="xsd:string" languageSpecificType="java:java.lang.String[]" qname="ns15:ArrayOf_xsd_string" xmlns:ns15="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:arrayMapping innerType="ns17:GiftCertificate" languageSpecificType="java:ws.GiftCertificate[]" qname="ns16:ArrayOf_tns1_GiftCertificate" xmlns:ns16="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:ns17="http://ws"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

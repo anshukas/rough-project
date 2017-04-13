@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:ax25="http://ws/xsd" xmlns:ax21="http://rmi.java/xsd" xmlns:ax22="http://io.java/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" targetNamespace="http://impl.service.v2.claimable.ws.netshoes.com.br">
+    <wsdl:types>
+        <xs:schema xmlns:ax23="http://io.java/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://rmi.java/xsd">
+            <xs:import namespace="http://io.java/xsd"/>
+            <xs:import namespace="http://io.java/xsd"/>
+            <xs:complexType name="RemoteException">
+                <xs:complexContent>
+                    <xs:extension base="ax23:IOException">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="cause" nillable="true" type="xs:anyType"/>
+                            <xs:element minOccurs="0" name="message" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax24="http://rmi.java/xsd" xmlns:ax26="http://ws/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://impl.service.v2.claimable.ws.netshoes.com.br">
+            <xs:import namespace="http://rmi.java/xsd"/>
+            <xs:import namespace="http://ws/xsd"/>
+            <xs:element name="ClaimableWebServiceImplRemoteException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="RemoteException" nillable="true" type="ax24:RemoteException"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createGCUsingGiftCertificateGenerator">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="req" nillable="true" type="ax25:CreateGCUsingGiftCertificateGeneratorReq"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createGCUsingGiftCertificateGeneratorResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax25:CreateGCUsingGiftCertificateGeneratorRes"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cancelGiftCertificate">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="cancelGiftCertificateRequest" nillable="true" type="ax25:CancelGiftCertificateRequest"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cancelGiftCertificateResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax25:Result"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="activateGiftCertificate">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="req" nillable="true" type="ax25:ActivateGiftCertificateRequest"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="activateGiftCertificateResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax25:Result"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://io.java/xsd">
+            <xs:complexType name="IOException">
+                <xs:sequence/>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://ws/xsd">
+            <xs:complexType name="CreateGCUsingGiftCertificateGeneratorReq">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="applyToShipping" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="expirationDate" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="folderName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="length" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="maxUses" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="noOfGiftCertificate" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="origin" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="prefix" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="siteIds" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="suffix" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="syncWithET" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="valor" nillable="true" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CreateGCUsingGiftCertificateGeneratorRes">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="result" nillable="true" type="ax25:Result"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Result">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="messages" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="status" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CancelGiftCertificateRequest">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="gcIds" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ActivateGiftCertificateRequest">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="giftCertificateIds" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="createGCUsingGiftCertificateGeneratorRequest">
+        <wsdl:part name="parameters" element="ns:createGCUsingGiftCertificateGenerator"/>
+    </wsdl:message>
+    <wsdl:message name="createGCUsingGiftCertificateGeneratorResponse">
+        <wsdl:part name="parameters" element="ns:createGCUsingGiftCertificateGeneratorResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ClaimableWebServiceImplRemoteException">
+        <wsdl:part name="parameters" element="ns:ClaimableWebServiceImplRemoteException"/>
+    </wsdl:message>
+    <wsdl:message name="activateGiftCertificateRequest">
+        <wsdl:part name="parameters" element="ns:activateGiftCertificate"/>
+    </wsdl:message>
+    <wsdl:message name="activateGiftCertificateResponse">
+        <wsdl:part name="parameters" element="ns:activateGiftCertificateResponse"/>
+    </wsdl:message>
+    <wsdl:message name="cancelGiftCertificateRequest">
+        <wsdl:part name="parameters" element="ns:cancelGiftCertificate"/>
+    </wsdl:message>
+    <wsdl:message name="cancelGiftCertificateResponse">
+        <wsdl:part name="parameters" element="ns:cancelGiftCertificateResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ClaimableWebServiceImplPortType">
+        <wsdl:operation name="createGCUsingGiftCertificateGenerator">
+            <wsdl:input message="ns:createGCUsingGiftCertificateGeneratorRequest" wsaw:Action="urn:createGCUsingGiftCertificateGenerator"/>
+            <wsdl:output message="ns:createGCUsingGiftCertificateGeneratorResponse" wsaw:Action="urn:createGCUsingGiftCertificateGeneratorResponse"/>
+            <wsdl:fault message="ns:ClaimableWebServiceImplRemoteException" name="ClaimableWebServiceImplRemoteException" wsaw:Action="urn:createGCUsingGiftCertificateGeneratorClaimableWebServiceImplRemoteException"/>
+        </wsdl:operation>
+        <wsdl:operation name="activateGiftCertificate">
+            <wsdl:input message="ns:activateGiftCertificateRequest" wsaw:Action="urn:activateGiftCertificate"/>
+            <wsdl:output message="ns:activateGiftCertificateResponse" wsaw:Action="urn:activateGiftCertificateResponse"/>
+            <wsdl:fault message="ns:ClaimableWebServiceImplRemoteException" name="ClaimableWebServiceImplRemoteException" wsaw:Action="urn:activateGiftCertificateClaimableWebServiceImplRemoteException"/>
+        </wsdl:operation>
+        <wsdl:operation name="cancelGiftCertificate">
+            <wsdl:input message="ns:cancelGiftCertificateRequest" wsaw:Action="urn:cancelGiftCertificate"/>
+            <wsdl:output message="ns:cancelGiftCertificateResponse" wsaw:Action="urn:cancelGiftCertificateResponse"/>
+            <wsdl:fault message="ns:ClaimableWebServiceImplRemoteException" name="ClaimableWebServiceImplRemoteException" wsaw:Action="urn:cancelGiftCertificateClaimableWebServiceImplRemoteException"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ClaimableWebServiceImplSoap11Binding" type="ns:ClaimableWebServiceImplPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="createGCUsingGiftCertificateGenerator">
+            <soap:operation soapAction="urn:createGCUsingGiftCertificateGenerator" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ClaimableWebServiceImplRemoteException">
+                <soap:fault use="literal" name="ClaimableWebServiceImplRemoteException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="activateGiftCertificate">
+            <soap:operation soapAction="urn:activateGiftCertificate" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ClaimableWebServiceImplRemoteException">
+                <soap:fault use="literal" name="ClaimableWebServiceImplRemoteException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="cancelGiftCertificate">
+            <soap:operation soapAction="urn:cancelGiftCertificate" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ClaimableWebServiceImplRemoteException">
+                <soap:fault use="literal" name="ClaimableWebServiceImplRemoteException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ClaimableWebServiceImplSoap12Binding" type="ns:ClaimableWebServiceImplPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="createGCUsingGiftCertificateGenerator">
+            <soap12:operation soapAction="urn:createGCUsingGiftCertificateGenerator" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ClaimableWebServiceImplRemoteException">
+                <soap12:fault use="literal" name="ClaimableWebServiceImplRemoteException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="activateGiftCertificate">
+            <soap12:operation soapAction="urn:activateGiftCertificate" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ClaimableWebServiceImplRemoteException">
+                <soap12:fault use="literal" name="ClaimableWebServiceImplRemoteException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="cancelGiftCertificate">
+            <soap12:operation soapAction="urn:cancelGiftCertificate" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ClaimableWebServiceImplRemoteException">
+                <soap12:fault use="literal" name="ClaimableWebServiceImplRemoteException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ClaimableWebServiceImplHttpBinding" type="ns:ClaimableWebServiceImplPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="createGCUsingGiftCertificateGenerator">
+            <http:operation location="createGCUsingGiftCertificateGenerator"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+            <wsdl:fault name="ClaimableWebServiceImplRemoteException"/>
+        </wsdl:operation>
+        <wsdl:operation name="activateGiftCertificate">
+            <http:operation location="activateGiftCertificate"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+            <wsdl:fault name="ClaimableWebServiceImplRemoteException"/>
+        </wsdl:operation>
+        <wsdl:operation name="cancelGiftCertificate">
+            <http:operation location="cancelGiftCertificate"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+            <wsdl:fault name="ClaimableWebServiceImplRemoteException"/>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ClaimableWebServiceImpl">
+        <wsdl:port name="ClaimableWebServiceImplHttpSoap11Endpoint" binding="ns:ClaimableWebServiceImplSoap11Binding">
+            <soap:address location="http://localhost:8080/axis2/services/ClaimableWebServiceImpl"/>
+        </wsdl:port>
+        <wsdl:port name="ClaimableWebServiceImplHttpSoap12Endpoint" binding="ns:ClaimableWebServiceImplSoap12Binding">
+            <soap12:address location="http://localhost:8080/axis2/services/ClaimableWebServiceImpl"/>
+        </wsdl:port>
+        <wsdl:port name="ClaimableWebServiceImplHttpEndpoint" binding="ns:ClaimableWebServiceImplHttpBinding">
+            <http:address location="http://localhost:8080/axis2/services/ClaimableWebServiceImpl"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

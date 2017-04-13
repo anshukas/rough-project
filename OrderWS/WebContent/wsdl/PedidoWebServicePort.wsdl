@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://impl.service.order.connect.netshoes.com.br/" xmlns:intf="http://impl.service.order.connect.netshoes.com.br/" xmlns:tns1="commerce:connect" xmlns:tns2="pedidoRequest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://impl.service.order.connect.netshoes.com.br/">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="commerce:connect">
+   <import namespace="pedidoRequest"/>
+   <import namespace="http://impl.service.order.connect.netshoes.com.br/"/>
+   <element name="alterarStatusPedido">
+    <complexType>
+     <sequence>
+      <element name="AlterarStatusPedidoRequest" type="tns1:AlterarStatusPedidoRequest"/>
+     </sequence>
+    </complexType>
+   </element>
+   <simpleType name="orderShipmentStatus">
+    <restriction base="xsd:string">
+     <enumeration value="AWAITING_INVENTORY"/>
+     <enumeration value="INVENTORY_ASSIGNED"/>
+     <enumeration value="RELEASED"/>
+     <enumeration value="PACKING"/>
+     <enumeration value="SHIPPED"/>
+     <enumeration value="ONHOLD"/>
+     <enumeration value="CANCELLED"/>
+     <enumeration value="PGTO_CONFIRMADO"/>
+     <enumeration value="PREPARADO_PARA_ENVIO"/>
+     <enumeration value="DESPACHADO"/>
+     <enumeration value="ENTREGA_EFETUADA"/>
+     <enumeration value="CANCELADO"/>
+     <enumeration value="PGTO_NAO_CONFIRMADO"/>
+     <enumeration value="PEDIDO_INVALIDO"/>
+     <enumeration value="EM_ANALISE_CREDITO"/>
+     <enumeration value="SEPARADO_PARA_ENVIO"/>
+    </restriction>
+   </simpleType>
+   <simpleType name="shipmentSubStatus">
+    <restriction base="xsd:string">
+     <enumeration value="ENVIADO_PARA_TRANSPORTADORA"/>
+     <enumeration value="RECEBIDO_NA_TRANSPORTADORA"/>
+     <enumeration value="SAIU_PARA_ENTREGA"/>
+     <enumeration value="FALHA_NA_ENTREGA"/>
+     <enumeration value="SEPARADO_PARA_ENVIO"/>
+     <enumeration value="ENTREGA_EFETUADA"/>
+    </restriction>
+   </simpleType>
+   <complexType name="AlterarStatusPedidoRequest">
+    <sequence>
+     <element name="Pedido" nillable="true" type="tns2:Pedido"/>
+    </sequence>
+   </complexType>
+   <element name="alterarStatusPedidoResponse">
+    <complexType>
+     <sequence>
+      <element name="return" type="tns1:Result"/>
+     </sequence>
+    </complexType>
+   </element>
+   <simpleType name="Status">
+    <restriction base="xsd:string">
+     <enumeration value="SUCCESS"/>
+     <enumeration value="FAILURE"/>
+    </restriction>
+   </simpleType>
+   <simpleType name="messageStatus">
+    <restriction base="xsd:string">
+     <enumeration value="INFO"/>
+     <enumeration value="WARNING"/>
+     <enumeration value="ERROR"/>
+    </restriction>
+   </simpleType>
+   <complexType name="Message">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="Status" nillable="true" type="tns1:messageStatus"/>
+     <element maxOccurs="1" minOccurs="0" name="Information" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Result">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="Status" nillable="true" type="tns1:Status"/>
+     <element maxOccurs="1" minOccurs="0" name="Messages" nillable="true" type="impl:ArrayOf_tns1_Message"/>
+    </sequence>
+   </complexType>
+   <element name="listarNovosPedidos">
+    <complexType>
+     <sequence>
+      <element name="ListarNovosPedidosRequest" type="tns1:ListarNovosPedidosRequest"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ListarNovosPedidosRequest">
+    <sequence>
+     <element name="CodigoCatalogo" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="listarNovosPedidosResponse">
+    <complexType>
+     <sequence>
+      <element name="return" type="tns1:ListarPedidosResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <simpleType name="statusPedido">
+    <restriction base="xsd:string">
+     <enumeration value="PEDIDO_REALIZADO"/>
+     <enumeration value="PAGAMENTO_CONFIRMADO"/>
+     <enumeration value="PREPARADO_PARA_ENVIO"/>
+     <enumeration value="DESPACHADO"/>
+     <enumeration value="ENTREGA_EFETUADA"/>
+     <enumeration value="CANCELADO"/>
+     <enumeration value="PAGAMENTO_NAO_CONFIRMADO"/>
+     <enumeration value="AGUARDANDO_DEBITO"/>
+     <enumeration value="ENVIO_PARCIAL"/>
+     <enumeration value="ENTREGA_EM_AMENDAMENTO"/>
+     <enumeration value="SEPARADO_PARA_ENVIO"/>
+    </restriction>
+   </simpleType>
+   <complexType name="Personalizacao">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="PersonaDescricao" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="PersonaSku" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="PersonaValor" nillable="true" type="xsd:decimal"/>
+    </sequence>
+   </complexType>
+   <complexType name="Programa">
+    <sequence>
+     <element name="Nome" nillable="true" type="xsd:string"/>
+     <element name="Pontos" type="xsd:double"/>
+    </sequence>
+   </complexType>
+   <complexType name="PedidoSku">
+    <sequence>
+     <element name="CodigoSku" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="SellerID" nillable="true" type="xsd:string"/>
+     <element name="PrecoUnitario" nillable="true" type="xsd:decimal"/>
+     <element name="DescontoUnitario" nillable="true" type="xsd:decimal"/>
+     <element name="DescontoUnitarioNCard" nillable="true" type="xsd:decimal"/>
+     <element name="Quantidade" type="xsd:int"/>
+     <element maxOccurs="1" minOccurs="0" name="Brinde" nillable="true" type="xsd:boolean"/>
+     <element maxOccurs="1" minOccurs="0" name="Presente" nillable="true" type="xsd:boolean"/>
+     <element maxOccurs="1" minOccurs="0" name="ValorPresente" nillable="true" type="xsd:decimal"/>
+     <element maxOccurs="1" minOccurs="0" name="ListaPersona" nillable="true" type="impl:ArrayOf_tns1_Personalizacao"/>
+     <element maxOccurs="1" minOccurs="0" name="ListaProgramas" nillable="true" type="impl:ArrayOf_tns1_Programa"/>
+    </sequence>
+   </complexType>
+   <simpleType name="tipoPagamento">
+    <restriction base="xsd:string">
+     <enumeration value="CARTAO"/>
+     <enumeration value="BOLETO"/>
+     <enumeration value="TRANSFERENCIA"/>
+     <enumeration value="CUPOM"/>
+     <enumeration value="DEBITO"/>
+     <enumeration value="GIFT"/>
+     <enumeration value="TROCA"/>
+     <enumeration value="ONLINE"/>
+    </restriction>
+   </simpleType>
+   <complexType name="Cartao">
+    <sequence>
+     <element name="Numero" nillable="true" type="xsd:string"/>
+     <element name="Seguranca" nillable="true" type="xsd:string"/>
+     <element name="Titular" nillable="true" type="xsd:string"/>
+     <element name="ValidadeMes" nillable="true" type="xsd:string"/>
+     <element name="ValidadeAno" nillable="true" type="xsd:string"/>
+     <element name="Bandeira" nillable="true" type="xsd:string"/>
+     <element name="NumeroParcelas" type="xsd:int"/>
+     <element name="Valor" nillable="true" type="xsd:decimal"/>
+     <element maxOccurs="1" minOccurs="0" name="Token" nillable="true" type="xsd:string"/>
+     <element name="OptIn" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="Boleto">
+    <sequence>
+     <element name="Numero" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Cupom">
+    <sequence>
+     <element name="Codigo" nillable="true" type="xsd:string"/>
+     <element name="ValorUtilizado" nillable="true" type="xsd:decimal"/>
+    </sequence>
+   </complexType>
+   <complexType name="Debito">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="DataPagamento" nillable="true" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="Observacao" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Nsu" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Tid" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="CodAutorizacao" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="MensagemTransacao" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="CodRetorno" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Administradora" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="PagamentoOnline">
+    <sequence>
+     <element name="Gateway" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Pagamento">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="TipoPagamento" nillable="true" type="tns1:tipoPagamento"/>
+     <element maxOccurs="1" minOccurs="0" name="Origem" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Cartao" nillable="true" type="tns1:Cartao"/>
+     <element maxOccurs="1" minOccurs="0" name="Boleto" nillable="true" type="tns1:Boleto"/>
+     <element maxOccurs="1" minOccurs="0" name="Cupom" nillable="true" type="tns1:Cupom"/>
+     <element maxOccurs="1" minOccurs="0" name="Debito" nillable="true" type="tns1:Debito"/>
+     <element maxOccurs="1" minOccurs="0" name="Online" nillable="true" type="tns1:PagamentoOnline"/>
+    </sequence>
+   </complexType>
+   <simpleType name="statusEntrega">
+    <restriction base="xsd:string">
+     <enumeration value="PEDIDO_REALIZADO"/>
+     <enumeration value="PAGAMENTO_CONFIRMADO"/>
+     <enumeration value="PREPARADO_PARA_ENVIO"/>
+     <enumeration value="DESPACHADO"/>
+     <enumeration value="ENTREGA_EFETUADA"/>
+     <enumeration value="CANCELADO"/>
+     <enumeration value="PAGAMENTO_NAO_CONFIRMADO"/>
+     <enumeration value="AGUARDANDO_DEBITO"/>
+     <enumeration value="ENVIO_PARCIAL"/>
+     <enumeration value="ENTREGA_EM_AMENDAMENTO"/>
+     <enumeration value="SEPARADO_PARA_ENVIO"/>
+    </restriction>
+   </simpleType>
+   <complexType name="Endereco">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="Nome" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Sobrenome" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Pais" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Estado" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Cidade" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Rua" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="NumeroRua" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Complemento" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Bairro" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Cep" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="PontoReferencia" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Descricao" nillable="true" type="xsd:string"/>
+     <element name="EnderecoComercial" type="xsd:boolean"/>
+    </sequence>
+   </complexType>
+   <complexType name="Entrega">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="ServicoEntrega" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="NumeroEntrega" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="SellerID" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Status" nillable="true" type="tns1:statusEntrega"/>
+     <element maxOccurs="1" minOccurs="0" name="PrazoEntrega" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="DataAgendada" nillable="true" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="PeriodoAgendada" nillable="true" type="xsd:int"/>
+     <element maxOccurs="1" minOccurs="0" name="ValorEntrega" nillable="true" type="xsd:decimal"/>
+     <element maxOccurs="1" minOccurs="0" name="EnderecoEntrega" nillable="true" type="tns1:Endereco"/>
+    </sequence>
+   </complexType>
+   <complexType name="Pedido">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="NumeroPedido" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="CodigoCatalogo" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="DataPedido" nillable="true" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="Status" nillable="true" type="tns1:statusPedido"/>
+     <element maxOccurs="1" minOccurs="0" name="CupomDesconto" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="CampaignCode" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="UTMCampaignCode" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="CodigoCliente" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="EmailCliente" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="CpfCnpjCliente" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="IPCliente" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="DDDTelefone" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Telefone" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="SubTotal" nillable="true" type="xsd:decimal"/>
+     <element maxOccurs="1" minOccurs="0" name="ValorDesconto" nillable="true" type="xsd:decimal"/>
+     <element maxOccurs="1" minOccurs="0" name="ValorDescontoBoleto" nillable="true" type="xsd:decimal"/>
+     <element maxOccurs="1" minOccurs="0" name="ValorDescontoOutros" nillable="true" type="xsd:decimal"/>
+     <element maxOccurs="1" minOccurs="0" name="ValorTotalPedido" nillable="true" type="xsd:decimal"/>
+     <element maxOccurs="1" minOccurs="0" name="ListaSkus" nillable="true" type="impl:ArrayOf_tns1_PedidoSku"/>
+     <element maxOccurs="1" minOccurs="0" name="ListaPagamentos" nillable="true" type="impl:ArrayOf_tns1_Pagamento"/>
+     <element maxOccurs="1" minOccurs="0" name="ListaEntrega" nillable="true" type="impl:ArrayOf_tns1_Entrega"/>
+    </sequence>
+   </complexType>
+   <complexType name="ListarPedidosResponse">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="Pedidos" nillable="true" type="impl:ArrayOf_tns1_Pedido"/>
+     <element name="Result" nillable="true" type="tns1:Result"/>
+    </sequence>
+   </complexType>
+   <element name="validarBaixa">
+    <complexType>
+     <sequence>
+      <element name="ValidarBaixaRequest" type="tns1:ValidarBaixaRequest"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ValidarBaixaRequest">
+    <sequence>
+     <element name="ListaNumeroPedidos" nillable="true" type="impl:ArrayOf_xsd_string"/>
+    </sequence>
+   </complexType>
+   <element name="validarBaixaResponse">
+    <complexType>
+     <sequence>
+      <element name="return" type="tns1:Result"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://impl.service.order.connect.netshoes.com.br/">
+   <import namespace="pedidoRequest"/>
+   <import namespace="commerce:connect"/>
+   <complexType name="ArrayOf_xsd_string">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns2_Entrega">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns2:Entrega"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns1_Message">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:Message"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns1_Personalizacao">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:Personalizacao"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns1_Programa">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:Programa"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns1_PedidoSku">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:PedidoSku"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns1_Pagamento">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:Pagamento"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns1_Entrega">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:Entrega"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns1_Pedido">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:Pedido"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="pedidoRequest">
+   <import namespace="http://impl.service.order.connect.netshoes.com.br/"/>
+   <import namespace="commerce:connect"/>
+   <complexType name="Entrega">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="Numero" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="UrlRastreamento" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="ListaSkus" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element maxOccurs="1" minOccurs="0" name="Status" nillable="true" type="tns1:orderShipmentStatus"/>
+     <element maxOccurs="1" minOccurs="0" name="SubStatus" nillable="true" type="tns1:shipmentSubStatus"/>
+     <element maxOccurs="1" minOccurs="0" name="PrazoEntrega" nillable="true" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="PrazoTroca" nillable="true" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="DataEntrega" nillable="true" type="xsd:dateTime"/>
+     <element maxOccurs="1" minOccurs="0" name="TrocaWebDisponivel" nillable="true" type="xsd:boolean"/>
+     <element maxOccurs="1" minOccurs="0" name="DetalheErro" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="TimeStampStatus" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="Pedido">
+    <sequence>
+     <element name="Numero" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="Token" nillable="true" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="ListaEntregas" nillable="true" type="impl:ArrayOf_tns2_Entrega"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="alterarStatusPedidoRequest">
+
+      <wsdl:part element="tns1:alterarStatusPedido" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="validarBaixaResponse">
+
+      <wsdl:part element="tns1:validarBaixaResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="listarNovosPedidosResponse">
+
+      <wsdl:part element="tns1:listarNovosPedidosResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="alterarStatusPedidoResponse">
+
+      <wsdl:part element="tns1:alterarStatusPedidoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="listarNovosPedidosRequest">
+
+      <wsdl:part element="tns1:listarNovosPedidos" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="validarBaixaRequest">
+
+      <wsdl:part element="tns1:validarBaixa" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="PedidoWebService">
+
+      <wsdl:operation name="alterarStatusPedido">
+
+         <wsdl:input message="impl:alterarStatusPedidoRequest" name="alterarStatusPedidoRequest"/>
+
+         <wsdl:output message="impl:alterarStatusPedidoResponse" name="alterarStatusPedidoResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listarNovosPedidos">
+
+         <wsdl:input message="impl:listarNovosPedidosRequest" name="listarNovosPedidosRequest"/>
+
+         <wsdl:output message="impl:listarNovosPedidosResponse" name="listarNovosPedidosResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="validarBaixa">
+
+         <wsdl:input message="impl:validarBaixaRequest" name="validarBaixaRequest"/>
+
+         <wsdl:output message="impl:validarBaixaResponse" name="validarBaixaResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="PedidoWebServicePortSoapBinding" type="impl:PedidoWebService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="alterarStatusPedido">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="alterarStatusPedidoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="alterarStatusPedidoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listarNovosPedidos">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="listarNovosPedidosRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listarNovosPedidosResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="validarBaixa">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="validarBaixaRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="validarBaixaResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="PedidoWebServiceImpl">
+
+      <wsdl:port binding="impl:PedidoWebServicePortSoapBinding" name="PedidoWebServicePort">
+
+         <wsdlsoap:address location="http://localhost:8080/OrderWS/services/PedidoWebServicePort"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

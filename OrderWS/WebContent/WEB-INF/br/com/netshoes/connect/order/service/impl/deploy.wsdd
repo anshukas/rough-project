@@ -1,0 +1,306 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from PedidoWebServiceImpl WSDL service -->
+
+  <service name="PedidoWebServicePort" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://impl.service.order.connect.netshoes.com.br/"/>
+      <parameter name="wsdlServiceElement" value="PedidoWebServiceImpl"/>
+      <parameter name="schemaQualified" value="http://impl.service.order.connect.netshoes.com.br/"/>
+      <parameter name="schemaUnqualified" value="commerce:connect,pedidoRequest"/>
+      <parameter name="wsdlServicePort" value="PedidoWebServicePort"/>
+      <parameter name="className" value="br.com.netshoes.connect.order.service.impl.PedidoWebServicePortSoapBindingSkeleton"/>
+      <parameter name="wsdlPortType" value="PedidoWebService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:Result"
+        type="java:connect.Result"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:ValidarBaixaRequest"
+        type="java:connect.ValidarBaixaRequest"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://impl.service.order.connect.netshoes.com.br/"
+        qname="ns:ArrayOf_tns1_Entrega"
+        type="java:connect.Entrega[]"
+        innerType="cmp-ns:Entrega" xmlns:cmp-ns="commerce:connect"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://impl.service.order.connect.netshoes.com.br/"
+        qname="ns:ArrayOf_tns1_Personalizacao"
+        type="java:connect.Personalizacao[]"
+        innerType="cmp-ns:Personalizacao" xmlns:cmp-ns="commerce:connect"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:Programa"
+        type="java:connect.Programa"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:Cupom"
+        type="java:connect.Cupom"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:ListarPedidosResponse"
+        type="java:connect.ListarPedidosResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:Boleto"
+        type="java:connect.Boleto"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:Cartao"
+        type="java:connect.Cartao"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://impl.service.order.connect.netshoes.com.br/"
+        qname="ns:ArrayOf_xsd_string"
+        type="java:java.lang.String[]"
+        innerType="cmp-ns:string" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://impl.service.order.connect.netshoes.com.br/"
+        qname="ns:ArrayOf_tns2_Entrega"
+        type="java:pedidoRequest.Entrega[]"
+        innerType="cmp-ns:Entrega" xmlns:cmp-ns="pedidoRequest"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:Pedido"
+        type="java:connect.Pedido"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:Pagamento"
+        type="java:connect.Pagamento"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:Endereco"
+        type="java:connect.Endereco"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:tipoPagamento"
+        type="java:connect.TipoPagamento"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:PedidoSku"
+        type="java:connect.PedidoSku"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:shipmentSubStatus"
+        type="java:connect.ShipmentSubStatus"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://impl.service.order.connect.netshoes.com.br/"
+        qname="ns:ArrayOf_tns1_Pagamento"
+        type="java:connect.Pagamento[]"
+        innerType="cmp-ns:Pagamento" xmlns:cmp-ns="commerce:connect"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="pedidoRequest"
+        qname="ns:Entrega"
+        type="java:pedidoRequest.Entrega"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:Personalizacao"
+        type="java:connect.Personalizacao"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:messageStatus"
+        type="java:connect.MessageStatus"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="pedidoRequest"
+        qname="ns:Pedido"
+        type="java:pedidoRequest.Pedido"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:Debito"
+        type="java:connect.Debito"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:Message"
+        type="java:connect.Message"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:statusEntrega"
+        type="java:connect.StatusEntrega"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://impl.service.order.connect.netshoes.com.br/"
+        qname="ns:ArrayOf_tns1_Programa"
+        type="java:connect.Programa[]"
+        innerType="cmp-ns:Programa" xmlns:cmp-ns="commerce:connect"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:Status"
+        type="java:connect.Status"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://impl.service.order.connect.netshoes.com.br/"
+        qname="ns:ArrayOf_tns1_PedidoSku"
+        type="java:connect.PedidoSku[]"
+        innerType="cmp-ns:PedidoSku" xmlns:cmp-ns="commerce:connect"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:statusPedido"
+        type="java:connect.StatusPedido"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:Entrega"
+        type="java:connect.Entrega"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://impl.service.order.connect.netshoes.com.br/"
+        qname="ns:ArrayOf_tns1_Pedido"
+        type="java:connect.Pedido[]"
+        innerType="cmp-ns:Pedido" xmlns:cmp-ns="commerce:connect"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:AlterarStatusPedidoRequest"
+        type="java:connect.AlterarStatusPedidoRequest"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:orderShipmentStatus"
+        type="java:connect.OrderShipmentStatus"
+        serializer="org.apache.axis.encoding.ser.EnumSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://impl.service.order.connect.netshoes.com.br/"
+        qname="ns:ArrayOf_tns1_Message"
+        type="java:connect.Message[]"
+        innerType="cmp-ns:Message" xmlns:cmp-ns="commerce:connect"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:ListarNovosPedidosRequest"
+        type="java:connect.ListarNovosPedidosRequest"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="commerce:connect"
+        qname="ns:PagamentoOnline"
+        type="java:connect.PagamentoOnline"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

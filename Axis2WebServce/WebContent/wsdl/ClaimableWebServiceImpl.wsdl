@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:intf="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns:tns1="http://ws" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://impl.service.v2.claimable.ws.netshoes.com.br" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://ws"/>
+   <element name="createSingleGiftCertificate">
+    <complexType>
+     <sequence>
+      <element name="criarSingleGiftCertificateRequest" type="tns1:CreateSingleGiftCertificateRequest"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createSingleGiftCertificateResponse">
+    <complexType>
+     <sequence>
+      <element name="createSingleGiftCertificateReturn" type="tns1:CreateSingleGiftCertificateResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_tns1_Message">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:Message"/>
+    </sequence>
+   </complexType>
+   <element name="createGCUsingGiftCertificateGenerator">
+    <complexType>
+     <sequence>
+      <element name="criarGCUsingGiftCertificateGeneratorRequest" type="tns1:CreateGCUsingGiftCertificateGeneratorRequest"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createGCUsingGiftCertificateGeneratorResponse">
+    <complexType>
+     <sequence>
+      <element name="createGCUsingGiftCertificateGeneratorReturn" type="tns1:CreateGCUsingGiftCertificateGeneratorResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="activateGiftCertificate">
+    <complexType>
+     <sequence>
+      <element name="ativateGiftCertificateRequest" type="tns1:ActivateGiftCertificateRequest"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_xsd_anyType">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+   <element name="activateGiftCertificateResponse">
+    <complexType>
+     <sequence>
+      <element name="activateGiftCertificateReturn" type="tns1:Result"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="cancelGiftCertificate">
+    <complexType>
+     <sequence>
+      <element name="cancelGiftCertificateRequest" type="tns1:CancelGiftCertificateRequest"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="cancelGiftCertificateResponse">
+    <complexType>
+     <sequence>
+      <element name="cancelGiftCertificateReturn" type="tns1:Result"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://ws" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://impl.service.v2.claimable.ws.netshoes.com.br"/>
+   <complexType name="CreateSingleGiftCertificateRequest">
+    <sequence>
+     <element name="amount" nillable="true" type="xsd:decimal"/>
+     <element name="ids" nillable="true" type="xsd:string"/>
+     <element name="siteIds" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Message">
+    <sequence>
+     <element name="information" nillable="true" type="xsd:string"/>
+     <element name="status" nillable="true" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+   <complexType name="Result">
+    <sequence>
+     <element name="messages" nillable="true" type="impl:ArrayOf_tns1_Message"/>
+     <element name="status" nillable="true" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+   <complexType name="CreateSingleGiftCertificateResponse">
+    <sequence>
+     <element name="result" nillable="true" type="tns1:Result"/>
+    </sequence>
+   </complexType>
+   <complexType name="CreateGCUsingGiftCertificateGeneratorRequest">
+    <sequence>
+     <element name="applyToShipping" nillable="true" type="xsd:boolean"/>
+     <element name="expirationDate" nillable="true" type="xsd:dateTime"/>
+     <element name="folderName" nillable="true" type="xsd:string"/>
+     <element name="length" nillable="true" type="xsd:int"/>
+     <element name="loja" nillable="true" type="xsd:string"/>
+     <element name="maxUses" nillable="true" type="xsd:int"/>
+     <element name="noOfGiftCertificate" nillable="true" type="xsd:int"/>
+     <element name="origin" nillable="true" type="xsd:anyType"/>
+     <element name="prefix" nillable="true" type="xsd:string"/>
+     <element name="suffix" nillable="true" type="xsd:string"/>
+     <element name="syncWithET" nillable="true" type="xsd:boolean"/>
+     <element name="valor" nillable="true" type="xsd:decimal"/>
+    </sequence>
+   </complexType>
+   <complexType name="CreateGCUsingGiftCertificateGeneratorResponse">
+    <sequence>
+     <element name="result" nillable="true" type="tns1:Result"/>
+    </sequence>
+   </complexType>
+   <complexType name="ActivateGiftCertificateRequest">
+    <sequence>
+     <element name="giftCertificate" nillable="true" type="impl:ArrayOf_xsd_anyType"/>
+    </sequence>
+   </complexType>
+   <complexType name="CancelGiftCertificateRequest">
+    <sequence>
+     <element name="giftCertificate" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="cancelGiftCertificateResponse">
+
+      <wsdl:part element="impl:cancelGiftCertificateResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="activateGiftCertificateRequest">
+
+      <wsdl:part element="impl:activateGiftCertificate" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="cancelGiftCertificateRequest">
+
+      <wsdl:part element="impl:cancelGiftCertificate" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createSingleGiftCertificateResponse">
+
+      <wsdl:part element="impl:createSingleGiftCertificateResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="activateGiftCertificateResponse">
+
+      <wsdl:part element="impl:activateGiftCertificateResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createGCUsingGiftCertificateGeneratorResponse">
+
+      <wsdl:part element="impl:createGCUsingGiftCertificateGeneratorResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createSingleGiftCertificateRequest">
+
+      <wsdl:part element="impl:createSingleGiftCertificate" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createGCUsingGiftCertificateGeneratorRequest">
+
+      <wsdl:part element="impl:createGCUsingGiftCertificateGenerator" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="ClaimableWebServiceImpl">
+
+      <wsdl:operation name="createSingleGiftCertificate">
+
+         <wsdl:input message="impl:createSingleGiftCertificateRequest" name="createSingleGiftCertificateRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createSingleGiftCertificateResponse" name="createSingleGiftCertificateResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createGCUsingGiftCertificateGenerator">
+
+         <wsdl:input message="impl:createGCUsingGiftCertificateGeneratorRequest" name="createGCUsingGiftCertificateGeneratorRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createGCUsingGiftCertificateGeneratorResponse" name="createGCUsingGiftCertificateGeneratorResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="activateGiftCertificate">
+
+         <wsdl:input message="impl:activateGiftCertificateRequest" name="activateGiftCertificateRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:activateGiftCertificateResponse" name="activateGiftCertificateResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="cancelGiftCertificate">
+
+         <wsdl:input message="impl:cancelGiftCertificateRequest" name="cancelGiftCertificateRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:cancelGiftCertificateResponse" name="cancelGiftCertificateResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ClaimableWebServiceImplSoapBinding" type="impl:ClaimableWebServiceImpl">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="createSingleGiftCertificate">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createSingleGiftCertificateRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createSingleGiftCertificateResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createGCUsingGiftCertificateGenerator">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createGCUsingGiftCertificateGeneratorRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createGCUsingGiftCertificateGeneratorResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="activateGiftCertificate">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="activateGiftCertificateRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="activateGiftCertificateResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="cancelGiftCertificate">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="cancelGiftCertificateRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="cancelGiftCertificateResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ClaimableWebServiceImplService">
+
+      <wsdl:port binding="impl:ClaimableWebServiceImplSoapBinding" name="ClaimableWebServiceImpl">
+
+         <wsdlsoap:address location="http://localhost:8080/Axis2WebServce/services/ClaimableWebServiceImpl"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

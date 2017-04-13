@@ -1,0 +1,180 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ClaimableWebServiceImplService WSDL service -->
+
+  <service name="ClaimableWebServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://impl.service.v2.claimable.ws.netshoes.com.br"/>
+      <parameter name="wsdlServiceElement" value="ClaimableWebServiceImplService"/>
+      <parameter name="schemaQualified" value="http://ws,http://impl.service.v2.claimable.ws.netshoes.com.br"/>
+      <parameter name="wsdlServicePort" value="ClaimableWebServiceImpl"/>
+      <parameter name="className" value="br.com.netshoes.ws.claimable.v2.service.impl.ClaimableWebServiceImplSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="ClaimableWebServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="createSingleGiftCertificate" qname="operNS:createSingleGiftCertificate" xmlns:operNS="http://impl.service.v2.claimable.ws.netshoes.com.br" returnQName="retNS:createSingleGiftCertificateReturn" xmlns:retNS="http://impl.service.v2.claimable.ws.netshoes.com.br" returnType="rtns:CreateSingleGiftCertificateResponse" xmlns:rtns="http://ws" soapAction="" >
+        <parameter qname="pns:criarSingleGiftCertificateRequest" xmlns:pns="http://impl.service.v2.claimable.ws.netshoes.com.br" type="tns:CreateSingleGiftCertificateRequest" xmlns:tns="http://ws"/>
+      </operation>
+      <operation name="createGCUsingGiftCertificateGenerator" qname="operNS:createGCUsingGiftCertificateGenerator" xmlns:operNS="http://impl.service.v2.claimable.ws.netshoes.com.br" returnQName="retNS:createGCUsingGiftCertificateGeneratorReturn" xmlns:retNS="http://impl.service.v2.claimable.ws.netshoes.com.br" returnType="rtns:CreateGCUsingGiftCertificateGeneratorResponse" xmlns:rtns="http://ws" soapAction="" >
+        <parameter qname="pns:criarGCUsingGiftCertificateGeneratorRequest" xmlns:pns="http://impl.service.v2.claimable.ws.netshoes.com.br" type="tns:CreateGCUsingGiftCertificateGeneratorRequest" xmlns:tns="http://ws"/>
+      </operation>
+      <operation name="activateGiftCertificate" qname="operNS:activateGiftCertificate" xmlns:operNS="http://impl.service.v2.claimable.ws.netshoes.com.br" returnQName="retNS:activateGiftCertificateReturn" xmlns:retNS="http://impl.service.v2.claimable.ws.netshoes.com.br" returnType="rtns:Result" xmlns:rtns="http://ws" soapAction="" >
+        <parameter qname="pns:ativateGiftCertificateRequest" xmlns:pns="http://impl.service.v2.claimable.ws.netshoes.com.br" type="tns:ActivateGiftCertificateRequest" xmlns:tns="http://ws"/>
+      </operation>
+      <operation name="cancelGiftCertificate" qname="operNS:cancelGiftCertificate" xmlns:operNS="http://impl.service.v2.claimable.ws.netshoes.com.br" returnQName="retNS:cancelGiftCertificateReturn" xmlns:retNS="http://impl.service.v2.claimable.ws.netshoes.com.br" returnType="rtns:Result" xmlns:rtns="http://ws" soapAction="" >
+        <parameter qname="pns:cancelGiftCertificateRequest" xmlns:pns="http://impl.service.v2.claimable.ws.netshoes.com.br" type="tns:CancelGiftCertificateRequest" xmlns:tns="http://ws"/>
+      </operation>
+      <parameter name="allowedMethods" value="createSingleGiftCertificate cancelGiftCertificate createGCUsingGiftCertificateGenerator activateGiftCertificate"/>
+
+      <typeMapping
+        xmlns:ns="http://impl.service.v2.claimable.ws.netshoes.com.br"
+        qname="ns:>activateGiftCertificate"
+        type="java:br.com.netshoes.ws.claimable.v2.service.impl.ActivateGiftCertificate"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://ws"
+        qname="ns:CancelGiftCertificateRequest"
+        type="java:ws.CancelGiftCertificateRequest"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://ws"
+        qname="ns:ActivateGiftCertificateRequest"
+        type="java:ws.ActivateGiftCertificateRequest"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://impl.service.v2.claimable.ws.netshoes.com.br"
+        qname="ns:>activateGiftCertificateResponse"
+        type="java:br.com.netshoes.ws.claimable.v2.service.impl.ActivateGiftCertificateResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://ws"
+        qname="ns:Result"
+        type="java:ws.Result"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://impl.service.v2.claimable.ws.netshoes.com.br"
+        qname="ns:ArrayOf_tns1_Message"
+        type="java:ws.Message[]"
+        innerType="cmp-ns:Message" xmlns:cmp-ns="http://ws"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://ws"
+        qname="ns:Message"
+        type="java:ws.Message"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://impl.service.v2.claimable.ws.netshoes.com.br"
+        qname="ns:>createSingleGiftCertificateResponse"
+        type="java:br.com.netshoes.ws.claimable.v2.service.impl.CreateSingleGiftCertificateResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://impl.service.v2.claimable.ws.netshoes.com.br"
+        qname="ns:>createGCUsingGiftCertificateGeneratorResponse"
+        type="java:br.com.netshoes.ws.claimable.v2.service.impl.CreateGCUsingGiftCertificateGeneratorResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://ws"
+        qname="ns:CreateGCUsingGiftCertificateGeneratorRequest"
+        type="java:ws.CreateGCUsingGiftCertificateGeneratorRequest"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://impl.service.v2.claimable.ws.netshoes.com.br"
+        qname="ns:ArrayOf_xsd_anyType"
+        type="java:java.lang.Object[]"
+        innerType="cmp-ns:anyType" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://ws"
+        qname="ns:CreateSingleGiftCertificateRequest"
+        type="java:ws.CreateSingleGiftCertificateRequest"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://impl.service.v2.claimable.ws.netshoes.com.br"
+        qname="ns:>cancelGiftCertificateResponse"
+        type="java:br.com.netshoes.ws.claimable.v2.service.impl.CancelGiftCertificateResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://impl.service.v2.claimable.ws.netshoes.com.br"
+        qname="ns:>createGCUsingGiftCertificateGenerator"
+        type="java:br.com.netshoes.ws.claimable.v2.service.impl.CreateGCUsingGiftCertificateGenerator"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://impl.service.v2.claimable.ws.netshoes.com.br"
+        qname="ns:>cancelGiftCertificate"
+        type="java:br.com.netshoes.ws.claimable.v2.service.impl.CancelGiftCertificate"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://ws"
+        qname="ns:CreateSingleGiftCertificateResponse"
+        type="java:ws.CreateSingleGiftCertificateResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://impl.service.v2.claimable.ws.netshoes.com.br"
+        qname="ns:>createSingleGiftCertificate"
+        type="java:br.com.netshoes.ws.claimable.v2.service.impl.CreateSingleGiftCertificate"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://ws"
+        qname="ns:CreateGCUsingGiftCertificateGeneratorResponse"
+        type="java:ws.CreateGCUsingGiftCertificateGeneratorResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

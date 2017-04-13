@@ -1,0 +1,14 @@
+<!-- Using the WSDoAllSender security handler in request flow -->
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" java="http://xml.apache.org/axis/wsdd/providers/java">
+	<transport name="http" pivot="java:org.apache.axis.transport.http.HTTPSender">
+		<globalconfiguration>
+			<requestflow>
+				<handler type="java:org.apache.ws.axis.security.WSDoAllSender">
+					<parameter name="action" value="UsernameToken"/>
+					<parameter name="passwordType" value="PasswordDigest"/>
+					<parameter name="passwordCallbackClass" value="PWCallBack"/>
+				</handler>
+			</requestflow>
+		</globalconfiguration>
+	</transport>
+</deployment>

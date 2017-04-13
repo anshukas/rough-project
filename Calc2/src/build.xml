@@ -1,0 +1,172 @@
+<?xml version="1.0" ?>
+
+<!--
+   Ant buildfile for the Axis Fibonacci web service
+  -->
+
+<project name="FibonacciAuth" default="help" basedir=".">
+
+  <!-- =================================================================== -->
+  <!-- properties                                                          -->
+  <!-- =================================================================== -->
+
+	<!-- load build-machine-specific properties -->
+	<property file="build.properties" />
+
+  <property name="jarFile"      value="FibonacciAuth.jar" />
+  <property name="srcDir"       value="source" />
+  <property name="classDir"     value="classes" />
+
+  <!-- =================================================================== -->
+  <!-- Define the basic classpath                                          -->
+  <!-- =================================================================== -->
+  <path id="basic.class.path">
+	<fileset dir="${axisLibDir}">
+		<include name="*.jar"/>
+	</fileset>
+	<fileset dir="${wss4jLibDir}">
+		<include name="*.jar"/>
+	</fileset>
+    <pathelement path="${catalinaLib}" />
+    <pathelement path="${catalinaOptionalLib}" />
+    <pathelement path="${classDir}" />
+  </path>
+
+  <!-- =================================================================== -->
+  <!-- Print available targets                                             -->
+  <!-- =================================================================== -->
+	<target name="help">
+		<echo>The following targets are available:
+		compile
+		jar
+		deploy
+		test -Dn=... [-Dport=...]
+		test-saaj -Dn=... [-Dport=...]
+		test-sec -Dn=... [-Dport=...] 
+		tcpmon
+		undeploy
+		clean
+		</echo>
+	</target>
+
+  <!-- =================================================================== -->
+  <!-- Remove the class files                                              -->
+  <!-- =================================================================== -->
+  <target name="clean">
+    <delete dir="${classDir}" />
+    <delete file="${jarFile}" />
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Convert carriage-returns/line-feeds for current OS type             -->
+  <!-- =================================================================== -->
+  <target name="fixcrlf" description="fix carriage returns for OS type">
+    <fixcrlf srcdir="." includes="**/*.txt,*.xml,*.properties" />
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Compile everything                                                  -->
+  <!-- =================================================================== -->
+
+  <target name="compile">
+    <mkdir dir="${classDir}" />
+    <javac srcdir="${srcDir}/fibonacci"
+			includes="**/*.java"
+			nowarn="true"
+			destdir="${classDir}"
+			debug="on">
+      <classpath refid="basic.class.path" />
+    </javac>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Create the jar file                                                 -->
+  <!-- =================================================================== -->
+
+  <target name="jar" depends="compile">
+    <jar jarfile="${jarFile}" basedir="${classDir}" />
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Deploy the web service                                              -->
+  <!-- =================================================================== -->
+
+  <target name="deploy" depends="jar">
+	<copy file="${jarFile}" todir="${axisLibDir}"/>
+
+	<java fork="true" classname="org.apache.axis.client.AdminClient">
+		<classpath refid="basic.class.path" />
+		<arg value="deploy.wsdd"/>
+	</java>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Un-Deploy the web service                                           -->
+  <!-- =================================================================== -->
+
+  <target name="undeploy">
+	<java fork="true" classname="org.apache.axis.client.AdminClient">
+		<classpath refid="basic.class.path" />
+		<arg value="undeploy.wsdd"/>
+	</java>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Run TCPMon															-->
+  <!-- =================================================================== -->
+
+  <target name="tcpmon" depends="ensure-port">
+	<java fork="true" spawn="true" classname="org.apache.axis.utils.tcpmon">
+		<classpath refid="basic.class.path" />
+		<arg value="8079"/>
+		<arg value="localhost"/>
+		<arg value="${port}"/>
+	</java>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Run the test programs                                               -->
+  <!-- =================================================================== -->
+
+	<target name="ensure-n" unless="n">
+		<property name="n" value="15" />
+	</target>
+
+	<target name="ensure-port" unless="port">
+		<property name="port" value="8080" />
+	</target>
+
+	<target name="ensure-wss" unless="wss">
+		<property name="wss" value="false" />
+	</target>
+
+  <target name="test-saaj" depends="ensure-n, ensure-port, compile">
+	<java fork="true" classname="fibonacci.ClientSAAJ">
+		<classpath refid="basic.class.path" />
+		<arg value="${n}"/>
+		<arg value="${port}"/>
+	</java>
+  </target>
+
+  <target name="test" depends="ensure-n, ensure-port, ensure-wss, compile">
+	<java fork="true" classname="fibonacci.ClientJAXRPC">
+		<jvmarg value="-Daxis.ClientConfigFile=client_deploy.wsdd" />
+		<classpath refid="basic.class.path" />
+		<arg value="${n}"/>
+		<arg value="${port}"/>
+		<arg value="false"/>
+	</java>
+  </target>
+
+  <target name="test-sec" depends="ensure-n, ensure-port, ensure-wss, compile">
+	<java fork="true" classname="fibonacci.ClientJAXRPC">
+		<jvmarg value="-Daxis.ClientConfigFile=client_deploy_sec.wsdd" />
+		<classpath refid="basic.class.path" />
+		<arg value="${n}"/>
+		<arg value="${port}"/>
+		<arg value="true"/>
+	</java>
+  </target>
+
+</project>
+

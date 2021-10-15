@@ -14,6 +14,7 @@ public class Test {
 	public static void main(String[] args) {
 
 		try {
+			System.out.println("test");
 			String webPage = "http://hmg02-atg11-app.ns2online.com.br:8080/dyn/admin/nucleus/oe/page/cache/PageCache/?shouldInvokeMethod=flush";
 			String name = "";
 			String password = "";
